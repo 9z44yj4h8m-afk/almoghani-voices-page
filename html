@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMOGHANI LIVE</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #050609;
+  color: white;
+  font-family: Tahoma, Arial, sans-serif;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 10% 10%, #7235bb30, transparent 35%),
+    radial-gradient(circle at 90% 80%, #238ad025, transparent 40%);
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  padding: 18px 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(#252b36, #080a0e);
+  border-bottom: 2px solid #cbd8ec;
+  box-shadow: 0 0 25px #d5e5ff60;
+}
+
+.logo {
+  font-size: clamp(22px, 4vw, 38px);
+  font-weight: 900;
+  background: linear-gradient(#fff9cc, #ffd16a, #97621c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  background: linear-gradient(#343d50, #10141c);
+  border: 1px solid #c4d3eb;
+  color: white;
+  padding: 11px 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #d5e5ff55;
+}
+
+.hero {
+  text-align: center;
+  padding: 35px 15px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 55px);
+  text-shadow: 0 0 25px #e3eeff;
+}
+
+.hero p {
+  color: #aebbd2;
+}
+
+.container {
+  width: min(1450px, 95%);
+  margin: auto;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.search {
+  flex: 1;
+  min-width: 180px;
+  background: #111723;
+  color: white;
+  border: 1px solid silver;
+  border-radius: 12px;
+  padding: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.sidebar, .panel {
+  background: linear-gradient(145deg, #202737, #080a10);
+  border: 2px solid #b9c9e3;
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow:
+    0 0 18px #d8e6ff55,
+    inset 0 0 20px #ffffff10;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.group {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 10px;
+  text-align: right;
+  color: white;
+  border-radius: 12px;
+  background: #171d29;
+  border: 1px solid #65738c;
+}
+
+.group.active {
+  border-color: #c38bff;
+  box-shadow: 0 0 17px #a64aff;
+}
+
+.panel h2 {
+  margin-top: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  position: relative;
+  min-height: 170px;
+  padding: 14px 10px;
+  border-radius: 17px;
+  border: 1px solid #8799b5;
+  background: linear-gradient(150deg, #303a4c, #090c12);
+  box-shadow: 0 0 12px #c9dbff45;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card:hover {
+  border-color: white;
+  box-shadow: 0 0 22px #ffffff90;
+}
+
+.channel-logo {
+  width: 85px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.placeholder {
+  font-size: 45px;
+}
+
+.channel-name {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.live {
+  font-size: 10px;
+  background: #c91c35;
+  padding: 4px 10px;
+  border-radius: 7px;
+  box-shadow: 0 0 12px red;
+}
+
+.fav {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #111a;
+  color: white;
+  border: 1px solid #78879c;
+  border-radius: 8px;
+  padding: 5px 8px;
+}
+
+.fav.selected {
+  color: gold;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000e;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.overlay.open {
+  display: flex;
+}
+
+.dialog {
+  width: min(950px, 100%);
+  background: #10151e;
+  border: 2px solid silver;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 0 35px #d8e6ff88;
+}
+
+.dialog-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+video, iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: black;
+  border: none;
+  border-radius: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #8e9bb1;
+}
+
+@media(max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .sidebar h2 {
+    display: none;
+  }
+
+  .group {
+    min-width: 125px;
+    white-space: nowrap;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .logo {
+    font-size: 21px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ALMOGHANI LIVE</div>
+
+  <div class="actions">
+    <button class="btn" onclick="location.reload()">⟳</button>
+    <button class="btn" onclick="toggleFullscreen()">⛶</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>ALMOGHANI LIVE</h1>
+  <p>🔴 البث المباشر | عالم القنوات والترفيه</p>
+  <p id="count">جاري تحميل القنوات...</p>
+</section>
+
+<main class="container">
+
+  <div class="toolbar">
+    <input
+      class="search"
+      id="search"
+      placeholder="🔍 ابحث عن قناة..."
+      oninput="render()"
+    >
+
+    <button class="btn" onclick="document.getElementById('file').click()">
+      📂 استيراد M3U
+    </button>
+
+    <input
+      id="file"
+      type="file"
+      accept=".m3u,.m3u8,.txt"
+      hidden
+      onchange="importM3U(event)"
+    >
+  </div>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h2>📺 الأقسام</h2>
+      <div id="groups"></div>
+    </aside>
+
+    <section class="panel">
+      <h2 id="sectionTitle">📡 جميع القنوات</h2>
+      <div class="grid" id="channels"></div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 ALMOGHANI LIVE
+</footer>
+
+<div class="overlay" id="overlay">
+  <div class="dialog">
+
+    <div class="dialog-top">
+      <h3 id="playerTitle">مشغل القنوات</h3>
+      <button class="btn" onclick="closePlayer()">✕</button>
+    </div>
+
+    <video
+      id="video"
+      controls
+      autoplay
+      playsinline
+    ></video>
+
+    <iframe
+      id="iframe"
+      class="hidden"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+    ></iframe>
+
+    <p id="status"></p>
+
+    <button class="btn" onclick="closePlayer()">
+      إيقاف البث
+    </button>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+let channels = [
+  {
+    name: "الإخبارية السعودية",
+    group: "السعودية",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-ekhbaria/297b3ef1cd0633ad9cfba7473a686a06/index.m3u8"
+  },
+  {
+    name: "السعودية الأولى",
+    group: "السعودية",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-saudi-tv/2ad66056b51fd8c1b624854623112e43/index.m3u8"
+  },
+  {
+    name: "السعودية الآن",
+    group: "السعودية",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-ksa-now/71ed3aa814c643306c0a8bc4fcc7d17f/index.m3u8"
+  },
+  {
+    name: "SBC",
+    group: "السعودية",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-sbc/90e09c0c28db26435799b4a14892a167/index.m3u8"
+  },
+  {
+    name: "الثقافية",
+    group: "السعودية",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-thaqafeyyah/28c0d2a20dbf1dc049ce15d3973f494b/index.m3u8"
+  },
+  {
+    name: "MBC 1",
+    group: "MBC",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1/15cf99af5de54063fdabfefe66adc075/index.m3u8"
+  },
+  {
+    name: "MBC 4",
+    group: "MBC",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8"
+  },
+  {
+    name: "MBC Drama",
+    group: "MBC",
+    logo: "",
+    url: "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8"
+  },
+  {
+    name: "تلفزيون قطر",
+    group: "الخليج",
+    logo: "",
+    url: "https://live.kwikmotion.com/qtv1live/qtv1.smil/playlist.m3u8"
+  },
+  {
+    name: "تلفزيون الكويت 1",
+    group: "الخليج",
+    logo: "",
+    url: "https://kwtktv1ta.cdn.mangomolo.com/ktv1/smil:ktv1.stream.smil/chunklist.m3u8"
+  }
+];
+
+let activeGroup = "الكل";
+let hls = null;
+
+const favorites = new Set(
+  JSON.parse(localStorage.getItem("almoghaniFavorites") || "[]")
+);
+
+function saveFavorites() {
+  localStorage.setItem(
+    "almoghaniFavorites",
+    JSON.stringify([...favorites])
+  );
+}
+
+function getGroups() {
+  return ["الكل", "المفضلة", ...new Set(channels.map(c => c.group))];
+}
+
+function renderGroups() {
+  const box = document.getElementById("groups");
+  box.innerHTML = "";
+
+  getGroups().forEach(group => {
+    const button = document.createElement("button");
+    button.className = "group" + (activeGroup === group ? " active" : "");
+    button.textContent = group;
+
+    button.onclick = () => {
+      activeGroup = group;
+      render();
+    };
+
+    box.appendChild(button);
+  });
+}
+
+function render() {
+  renderGroups();
+
+  const query = document.getElementById("search").value.toLowerCase();
+  const box = document.getElementById("channels");
+  box.innerHTML = "";
+
+  const filtered = channels.filter(c => {
+    const groupMatch =
+      activeGroup === "الكل" ||
+      (activeGroup === "المفضلة" && favorites.has(c.name)) ||
+      c.group === activeGroup;
+
+    return groupMatch && c.name.toLowerCase().includes(query);
+  });
+
+  document.getElementById("count").textContent =
+    channels.length + " قناة متاحة في القائمة";
+
+  document.getElementById("sectionTitle").textContent =
+    "📡 " + activeGroup + " — " + filtered.length;
+
+  filtered.forEach(channel => {
+    const card = document.createElement("button");
+    card.className = "card";
+    card.type = "button";
+
+    const icon = document.createElement("div");
+
+    if (channel.logo && /^https?:\/\//.test(channel.logo)) {
+      const img = document.createElement("img");
+      img.className = "channel-logo";
+      img.src = channel.logo;
+      img.alt = channel.name;
+      img.onerror = () => {
+        icon.textContent = "📺";
+        icon.className = "placeholder";
+      };
+      icon.appendChild(img);
+    } else {
+      icon.className = "placeholder";
+      icon.textContent = "📺";
+    }
+
+    const name = document.createElement("div");
+    name.className = "channel-name";
+    name.textContent = channel.name;
+
+    const badge = document.createElement("span");
+    badge.className = "live";
+    badge.textContent = "LIVE";
+
+    const fav = document.createElement("button");
+    fav.type = "button";
+    fav.className = "fav" + (favorites.has(channel.name) ? " selected" : "");
+    fav.textContent = favorites.has(channel.name) ? "★" : "☆";
+
+    fav.onclick = e => {
+      e.stopPropagation();
+
+      if (favorites.has(channel.name)) {
+        favorites.delete(channel.name);
+      } else {
+        favorites.add(channel.name);
+      }
+
+      saveFavorites();
+      render();
+    };
+
+    card.append(icon, name, badge, fav);
+    card.onclick = () => playChannel(channel);
+
+    box.appendChild(card);
+  });
+}
+
+function importM3U(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const lines = String(reader.result).split(/\r?\n/);
+    const imported = [];
+    let current = null;
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+
+      if (line.startsWith("#EXTINF:")) {
+        const name = line.includes(",")
+          ? line.substring(line.indexOf(",") + 1).trim()
+          : "قناة بدون اسم";
+
+        const groupMatch = line.match(/group-title="([^"]*)"/);
+        const logoMatch = line.match(/tvg-logo="([^"]*)"/);
+
+        current = {
+          name,
+          group: groupMatch ? groupMatch[1] : "قنوات أخرى",
+          logo: logoMatch ? logoMatch[1] : "",
+          url: ""
+        };
+
+      } else if (
+        current &&
+        /^https?:\/\//i.test(line)
+      ) {
+        current.url = line;
+        imported.push(current);
+        current = null;
+      }
+    }
+
+    if (!imported.length) {
+      alert("لم يتم العثور على قنوات صالحة في الملف.");
+      return;
+    }
+
+    const existing = new Set(channels.map(c => c.name + "|" + c.url));
+
+    imported.forEach(channel => {
+      const key = channel.name + "|" + channel.url;
+
+      if (!existing.has(key)) {
+        channels.push(channel);
+        existing.add(key);
+      }
+    });
+
+    activeGroup = "الكل";
+    render();
+
+    alert("تم استيراد " + imported.length + " قناة من الملف.");
+  };
+
+  reader.readAsText(file, "UTF-8");
+}
+
+function youtubeEmbed(url) {
+  try {
+    const u = new URL(url);
+
+    if (u.hostname === "youtu.be") {
+      return "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(u.pathname.slice(1));
+    }
+
+    if (
+      u.hostname === "youtube.com" ||
+      u.hostname === "www.youtube.com" ||
+      u.hostname === "m.youtube.com"
+    ) {
+      const id = u.searchParams.get("v");
+
+      if (id) {
+        return "https://www.youtube-nocookie.com/embed/" +
+          encodeURIComponent(id);
+      }
+
+      if (u.pathname.startsWith("/live/")) {
+        return "https://www.youtube-nocookie.com/embed/" +
+          encodeURIComponent(u.pathname.split("/")[2]);
+      }
+    }
+  } catch {}
+
+  return null;
+}
+
+function closePlayer() {
+  const video = document.getElementById("video");
+  const iframe = document.getElementById("iframe");
+
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+
+  iframe.src = "about:blank";
+
+  if (hls) {
+    hls.destroy();
+    hls = null;
+  }
+
+  document.getElementById("overlay").classList.remove("open");
+}
+
+function playChannel(channel) {
+  closePlayer();
+
+  const overlay = document.getElementById("overlay");
+  const video = document.getElementById("video");
+  const iframe = document.getElementById("iframe");
+  const status = document.getElementById("status");
+
+  overlay.classList.add("open");
+
+  document.getElementById("playerTitle").textContent = channel.name;
+
+  video.classList.remove("hidden");
+  iframe.classList.add("hidden");
+  status.textContent = "جاري الاتصال بالبث...";
+
+  const url = channel.url;
+  const embed = youtubeEmbed(url);
+
+  if (embed) {
+    video.classList.add("hidden");
+    iframe.classList.remove("hidden");
+    iframe.src = embed + "?autoplay=1";
+    status.textContent = "";
+    return;
+  }
+
+  if (/\.m3u8(?:\?|$)/i.test(url)) {
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = url;
+      video.play().catch(() => {
+        status.textContent = "تعذر تشغيل البث تلقائيًا.";
+      });
+      return;
+    }
+
+    if (window.Hls && Hls.isSupported()) {
+      hls = new Hls();
+
+      hls.loadSource(url);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch(() => {
+          status.textContent = "اضغط تشغيل لبدء البث.";
+        });
+      });
+
+      hls.on(Hls.Events.ERROR, (_, data) => {
+        if (data.fatal) {
+          status.textContent =
+            "تعذر تشغيل القناة. قد يكون الرابط متوقفًا أو محظورًا.";
+        }
+      });
+
+      return;
+    }
+  }
+
+  video.src = url;
+  video.play().catch(() => {
+    status.textContent = "تعذر تشغيل الرابط في المتصفح.";
+  });
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+
+document.getElementById("overlay").addEventListener("click", e => {
+  if (e.target.id === "overlay") closePlayer();
+});
+
+render();
+</script>
+
+</body>
+</html>
