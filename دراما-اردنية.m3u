@@ -1,0 +1,25 @@
+#EXTM3U
+#EXTINF:-1 tvg-chno="1" tvg-logo="https://yt3.googleusercontent.com/TKRfEhUz7Bc09o8BFsTbRcyu8_oxdMZjSZLAi_mKTh-dt2w0YyZGD-qZjL2qL0nq6HFEedTQ60Y=s900-c-k-c0x00ffffff-no-rj" group-title="دراما اردنية",الأردن دراما — التلفزيون الأردني
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Drama/playlist.m3u8
+#EXTINF:-1 tvg-chno="2" tvg-logo="https://i.imgur.com/8UrCl4k.png" group-title="دراما اردنية",الأرشيف
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Archive/playlist.m3u8
+#EXTINF:-1 tvg-chno="3" tvg-logo="https://i.imgur.com/rtqVAxf.png" group-title="دراما اردنية",الوسام الفضائية — نبض الجنوب
+https://stream.addresses-sat.com/Alwesam/index.m3u8
+#EXTINF:-1 tvg-chno="4" tvg-logo="https://i.imgur.com/0XozB5N.png" group-title="دراما اردنية",الأردن
+https://jrtv-live.ercdn.net/jordanhd/jordanhd.m3u8
+#EXTINF:-1 tvg-chno="5" tvg-logo="https://i.imgur.com/2EmrZPQ.png" group-title="دراما اردنية",الأردن — الرياضية
+https://jrtv-live.ercdn.net/jordansporthd/jordansporthd.m3u8
+#EXTINF:-1 tvg-chno="6" tvg-logo="https://i.imgur.com/WX80rty.png" group-title="دراما اردنية",رؤيا
+https://live.kwikmotion.com/royatvpublic/royatv.smil/playlist.m3u8
+#EXTINF:-1 tvg-chno="7" tvg-logo="https://i.imgur.com/DuwwoO2.png" group-title="دراما اردنية",الأردن كوميدي
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Comedy/playlist.m3u8
+#EXTINF:-1 tvg-chno="8" tvg-logo="https://i.imgur.com/B45qcQX.png" group-title="دراما اردنية",الأردن مطبخ
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/cooking/playlist.m3u8
+#EXTINF:-1 tvg-chno="9" tvg-logo="https://i.imgur.com/gpeIoU9.png" group-title="دراما اردنية",الأردن سياحة
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Tourism/playlist.m3u8
+#EXTINF:-1 tvg-chno="10" tvg-logo="https://i.imgur.com/1DE7Gmw.png" group-title="دراما اردنية",أغاني أردنية
+https://playlist.fasttvcdn.com/pl/cc0blorawy1ibohhrupraa/Song/playlist.m3u8
+#EXTINF:-1 tvg-chno="11" tvg-logo="" group-title="دراما اردنية",Al Masar TV
+https://starmenajo.com/hls/almasar/index.m3u8
+#EXTINF:-1 tvg-chno="12" tvg-logo="" group-title="دراما اردنية",قناة طه
+https://stream.starmenajo.com/hls/app/live/ts:fhd.m3u8
